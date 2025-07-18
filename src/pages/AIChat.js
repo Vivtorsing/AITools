@@ -91,8 +91,8 @@ export default function AIChat() {
 
           try {
             const parsed = JSON.parse(jsonStr);
-            const delta = parsed.choices?.[0]?.delta;
-            const token = delta?.content;
+            const delta = parsed.choices && parsed.choices[0] && parsed.choices[0].delta;
+            const token = delta && delta.content;
 
             if(token) {
               fullContent += token;
