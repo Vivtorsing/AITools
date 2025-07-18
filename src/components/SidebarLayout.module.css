@@ -1,0 +1,59 @@
+.container {
+  display: flex;
+  height: 100vh;
+  background-color: #444;
+}
+
+.sidebar {
+  background-color: #2c2f33;
+  color: white;
+  transition: width 0.3s;
+  overflow: hidden;
+}
+
+.open {
+  width: 200px;
+}
+
+.closed {
+  width: 50px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  font-weight: bold;
+}
+
+.logo {
+  white-space: nowrap;
+}
+
+.toggleBtn {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.content {
+  flex: 1;
+  padding: 2rem;
+  overflow-y: auto;
+}

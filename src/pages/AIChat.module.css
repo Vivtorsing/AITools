@@ -1,0 +1,115 @@
+.chatContainer {
+  padding: 2rem;
+  max-width: 800px;
+  margin: auto;
+  font-family: 'Segoe UI', sans-serif;
+  color: #f1f1f1;
+  background-color: #2C2F33;
+  min-height: 100vh;
+}
+
+.messageList {
+  margin-top: 2rem;
+  border: 1px solid #444;
+  border-radius: 16px;
+  padding: 1rem;
+  max-height: 400px;
+  overflow-y: auto;
+  background: #23272A;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  scroll-behavior: smooth;
+}
+
+.message {
+  margin: 0.75rem 0;
+  padding: 0.75rem 1rem;
+  border-radius: 12px;
+  max-width: 90%;
+  word-wrap: break-word;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.user {
+  background-color: #ffb3d7;
+  color: #1e1e1e;
+  align-self: flex-end;
+  margin-left: auto;
+  border: 1px solid #ff99cc;
+}
+
+.assistant {
+  background-color: #99d6ff;
+  color: #1e1e1e;
+  align-self: flex-start;
+  margin-right: auto;
+  border: 1px solid #7cc8f5;
+}
+
+.inputRow {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  align-items: flex-end;
+}
+
+textarea {
+  font-family: inherit;
+  border-radius: 12px;
+  border: 1px solid #555;
+  padding: 0.75rem;
+  width: 100%;
+  resize: none;
+  background: #1e1e1e;
+  color: #f1f1f1;
+  transition: border-color 0.2s ease;
+}
+
+textarea:focus {
+  outline: none;
+  border-color: #ff80bf;
+  box-shadow: 0 0 0 3px rgba(255, 128, 191, 0.2);
+}
+
+button {
+  background-color: #ff80bf;
+  border: none;
+  padding: 0.75rem 1.25rem;
+  border-radius: 10px;
+  font-weight: bold;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+button:hover:not(:disabled) {
+  background-color: #ff5da6;
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+label {
+  display: block;
+  margin-bottom: 1rem;
+  color: #f1f1f1;
+}
+
+select {
+  margin-top: 0.5rem;
+  padding: 0.5rem;
+  border-radius: 8px;
+  border: 1px solid #444;
+  background-color: #1e1e1e;
+  color: #f1f1f1;
+  font-family: inherit;
+}
+
+strong {
+  color: #ff9ac1;
+}
+
+h1 {
+  color: #ff9ac1;
+}
