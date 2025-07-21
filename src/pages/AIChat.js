@@ -4,12 +4,18 @@ import SidebarLayout from '../components/SidebarLayout';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { Helmet } from 'react-helmet-async';
+import { RegExpMatcher, TextCensor, englishDataset, englishRecommendedTransformers } from 'obscenity';
+
+const matcher = new RegExpMatcher({
+	...englishDataset.build(),
+	...englishRecommendedTransformers,
+});
 
 export default function AIChat() {
   const [input, setInput] = useState('');
   const [messages, setMessages] = useState([]);
   const [systemPrompt, setSystemPrompt] = useState('You are a helpful assistant.');
-  const [model, setModel] = useState('gpt-4.1-nano-2025-04-14');
+  const [model, setModel] = useState('openai');
   const [models, setModels] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [cooldown, setCooldown] = useState(false);
@@ -22,6 +28,10 @@ export default function AIChat() {
         return res.json();
       })
       .then((data) => {
+        //remove premium models
+        data = data.filter((m) => m.tier !== 'flower');
+        data = data.filter((m) => m.tier !== 'nectar');
+
         setModels(data);
         const openaiModel = data.find((m) => m.name === 'openai');
         if(openaiModel) {
@@ -44,6 +54,16 @@ export default function AIChat() {
 
   const sendMessage = async () => {
     try {
+      //check if the user said something bad
+      if(matcher.hasMatch(input)) {
+        alert("🚫 Your message contains inappropriate language. Please revise it.");
+        return;
+      }
+      if(matcher.hasMatch(systemPrompt)) {
+        alert("🚫 The system prompt contains inappropriate language.");
+        return;
+      }
+
       if(!input.trim() || isLoading || cooldown) return;
 
       const newMessages = [
@@ -190,7 +210,7 @@ export default function AIChat() {
             }
           }}
         />
-        <button onClick={sendMessage} disabled={isLoading || cooldown}>
+        <button className={styles.button} onClick={sendMessage} disabled={isLoading || cooldown}>
           {isLoading ? "Waiting..." : "Send"}
         </button>
       </div>

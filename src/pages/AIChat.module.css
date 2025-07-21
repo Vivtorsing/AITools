@@ -70,7 +70,7 @@ textarea:focus {
   box-shadow: 0 0 0 3px rgba(255, 128, 191, 0.2);
 }
 
-button {
+.button {
   background-color: #ff80bf;
   border: none;
   padding: 0.75rem 1.25rem;
@@ -81,11 +81,11 @@ button {
   transition: background-color 0.2s ease;
 }
 
-button:hover:not(:disabled) {
+.button:hover:not(:disabled) {
   background-color: #ff5da6;
 }
 
-button:disabled {
+.button:disabled {
   opacity: 0.6;
   cursor: not-allowed;
 }

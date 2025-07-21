@@ -4,6 +4,8 @@ import { Helmet } from 'react-helmet-async';
 
 import SidebarLayout from '../components/SidebarLayout';
 
+import styles from './AIChat.module.css';
+
 export default function Home() {
   return (
     <SidebarLayout>
@@ -18,10 +20,10 @@ export default function Home() {
         <p style={{color: 'pink'}}>Explore AI-powered tools right in your browser.</p>
         <div style={{ marginTop: '2rem' }}>
           <Link to="/aichat">
-            <button style={{ margin: '1rem' }}>AI Chat</button>
+            <button className={styles.button} style={{ margin: '1rem' }}>AI Chat</button>
           </Link>
           <Link to="/aiimage">
-            <button style={{ margin: '1rem' }}>AI Image</button>
+            <button className={styles.button} style={{ margin: '1rem' }}>AI Image</button>
           </Link>
         </div>
       </div>

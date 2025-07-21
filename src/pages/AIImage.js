@@ -2,6 +2,12 @@ import React, { useEffect, useState } from 'react';
 import SidebarLayout from '../components/SidebarLayout';
 import styles from './AIChat.module.css';
 import { Helmet } from 'react-helmet-async';
+import { RegExpMatcher, TextCensor, englishDataset, englishRecommendedTransformers } from 'obscenity';
+
+const matcher = new RegExpMatcher({
+  ...englishDataset.build(),
+  ...englishRecommendedTransformers,
+});
 
 export default function AIImage() {
   const [input, setInput] = useState('');
@@ -32,6 +38,12 @@ export default function AIImage() {
   }, []);
 
   const generateImage = async () => {
+    //check if they said something bad
+    if(matcher.hasMatch(input)) {
+      alert("🚫 Your image prompt contains inappropriate language.");
+      return;
+    }
+
     if(!input.trim() || isLoading || cooldown) return;
 
     setIsLoading(true);
@@ -92,7 +104,7 @@ export default function AIImage() {
             }
           }}
         />
-        <button onClick={generateImage} disabled={isLoading || cooldown}>
+        <button className={styles.button} onClick={generateImage} disabled={isLoading || cooldown}>
           {isLoading ? "Generating..." : "Generate"}
         </button>
       </div>
