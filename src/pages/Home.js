@@ -25,6 +25,9 @@ export default function Home() {
           <Link to="/aiimage">
             <button className={styles.button} style={{ margin: '1rem' }}>AI Image</button>
           </Link>
+          <Link to="/aivoice">
+            <button className={styles.button} style={{ margin: '1rem' }}>AI Voice</button>
+          </Link>
         </div>
       </div>
     </SidebarLayout>

@@ -9,6 +9,7 @@ No logins, no fuss – just click and create.
 
 - 💬 **AI Chat** – Have friendly conversations with an AI powered by [Pollinations](https://text.pollinations.ai/).
 - 🎨 **AI Image Generator** – Turn text prompts into dreamy art using [Pollinations Image API](https://image.pollinations.ai/).
+- 🎙️ **AI Voice** – Turn text responses into a voice using Pollinations.
 - **Filter** - A nice filter to ensure users are not doing anything bad
 
 ---

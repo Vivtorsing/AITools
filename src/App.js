@@ -4,6 +4,7 @@ import { HelmetProvider } from 'react-helmet-async';
 import Home from './pages/Home';
 import AIChat from './pages/AIChat';
 import AIImage from './pages/AIImage';
+import AIVoice from './pages/AIVoice';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/aichat" element={<AIChat />} />
           <Route path="/aiimage" element={<AIImage />} />
+          <Route path="/aivoice" element={<AIVoice />} />
         </Routes>
       </Router>
     </HelmetProvider>

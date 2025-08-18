@@ -19,6 +19,7 @@ export default function SidebarLayout({ children }) {
             <Link to="/">🏠 Home</Link>
             <Link to="/aichat">💬 AI Chat</Link>
             <Link to="/aiimage">🖼️ AI Image</Link>
+            <Link to="/aivoice">🎙️ AI Voice</Link>
           </nav>
         )}
       </aside>
