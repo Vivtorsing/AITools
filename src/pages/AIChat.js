@@ -21,6 +21,20 @@ export default function AIChat() {
   const [cooldown, setCooldown] = useState(false);
   const chatRef = useRef(null);
 
+  const [openOptions, setOpenOptions] = useState(false);
+
+  const [temperature, setTemperature] = useState(1.0);
+  const [useTemperature, setUseTemperature] = useState(false);
+
+  const [topP, setTopP] = useState(1.0);
+  const [useTopP, setUseTopP] = useState(false);
+
+  const [presencePenalty, setPresencePenalty] = useState(0.0);
+  const [usePresencePenalty, setUsePresencePenalty] = useState(false);
+
+  const [frequencyPenalty, setFrequencyPenalty] = useState(0.0);
+  const [useFrequencyPenalty, setUseFrequencyPenalty] = useState(false);
+
   useEffect(() => {
     fetch('https://text.pollinations.ai/models')
       .then((res) => {
@@ -80,11 +94,21 @@ export default function AIChat() {
       const response = await fetch('https://text.pollinations.ai/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
+        /*body: JSON.stringify({
+          messages: newMessages,
+          stream: true,
+          private: true,
+          model,
+        }),*/
         body: JSON.stringify({
           messages: newMessages,
           stream: true,
           private: true,
           model,
+          ...(useTemperature && { temperature }),
+          ...(useTopP && { top_p: topP }),
+          ...(usePresencePenalty && { presence_penalty: presencePenalty }),
+          ...(useFrequencyPenalty && { frequency_penalty: frequencyPenalty }),
         }),
       });
 
@@ -182,6 +206,141 @@ export default function AIChat() {
         </label>
       </div>
 
+      <button onClick={() => setOpenOptions(!openOptions)} className={styles.button}>
+        {openOptions ? 'Close Options' : 'Open Options'}
+      </button>
+
+      {openOptions && (
+        <div className={styles.aiOptions}>
+          <strong>AI Options</strong>
+          <div className={styles.optionsRowContainer}>
+            <div className={styles.optionRow}>
+              <label>
+                <input
+                  type="checkbox"
+                  checked={useTemperature}
+                  onChange={() => setUseTemperature(!useTemperature)}
+                />
+                Temperature
+              </label>
+              <input
+                type="range"
+                min="0.0"
+                max="3.0"
+                step="0.1"
+                value={temperature}
+                onChange={(e) => setTemperature(parseFloat(e.target.value))}
+                disabled={!useTemperature}
+                style={{ margin: '0 0.5rem' }}
+              />
+              <input
+                type="number"
+                min="0.0"
+                max="3.0"
+                step="0.1"
+                value={temperature}
+                onChange={(e) => setTemperature(parseFloat(e.target.value))}
+                disabled={!useTemperature}
+                style={{ width: '4rem' }}
+              />
+            </div>
+
+            <div className={styles.optionRow}>
+              <label>
+                <input
+                  type="checkbox"
+                  checked={useTopP}
+                  onChange={() => setUseTopP(!useTopP)}
+                />
+                Top P
+              </label>
+              <input
+                type="range"
+                min="0.0"
+                max="1.0"
+                step="0.1"
+                value={topP}
+                onChange={(e) => setTopP(parseFloat(e.target.value))}
+                disabled={!useTopP}
+                style={{ margin: '0 0.5rem' }}
+              />
+              <input
+                type="number"
+                min="0.0"
+                max="1.0"
+                step="0.1"
+                value={topP}
+                onChange={(e) => setTopP(parseFloat(e.target.value))}
+                disabled={!useTopP}
+                style={{ width: '4rem' }}
+              />
+            </div>
+
+            <div className={styles.optionRow}>
+              <label>
+                <input
+                  type="checkbox"
+                  checked={usePresencePenalty}
+                  onChange={() => setUsePresencePenalty(!usePresencePenalty)}
+                />
+                Presence Penalty
+              </label>
+              <input
+                type="range"
+                min="-2.0"
+                max="2.0"
+                step="0.1"
+                value={presencePenalty}
+                onChange={(e) => setPresencePenalty(parseFloat(e.target.value))}
+                disabled={!usePresencePenalty}
+                style={{ margin: '0 0.5rem' }}
+              />
+              <input
+                type="number"
+                min="-2.0"
+                max="2.0"
+                step="0.1"
+                value={presencePenalty}
+                onChange={(e) => setPresencePenalty(parseFloat(e.target.value))}
+                disabled={!usePresencePenalty}
+                style={{ width: '4rem' }}
+              />
+            </div>
+
+            <div className={styles.optionRow}>
+              <label>
+                <input
+                  type="checkbox"
+                  checked={useFrequencyPenalty}
+                  onChange={() => setUseFrequencyPenalty(!useFrequencyPenalty)}
+                />
+                Frequency Penalty
+              </label>
+              <input
+                type="range"
+                min="-2.0"
+                max="2.0"
+                step="0.1"
+                value={frequencyPenalty}
+                onChange={(e) => setFrequencyPenalty(parseFloat(e.target.value))}
+                disabled={!useFrequencyPenalty}
+                style={{ margin: '0 0.5rem' }}
+              />
+              <input
+                type="number"
+                min="-2.0"
+                max="2.0"
+                step="0.1"
+                value={frequencyPenalty}
+                onChange={(e) => setFrequencyPenalty(parseFloat(e.target.value))}
+                disabled={!useFrequencyPenalty}
+                style={{ width: '4rem' }}
+              />
+            </div>
+          </div>
+        </div>
+      )}
+      
       <div className={styles.messageList} ref={chatRef}>
         {messages.map((msg, idx) => (
           <div
